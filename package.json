@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/Renestl/url-shortener#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongoose": "^4.8.6",
+    "shortid": "^2.2.8",
+    "valid-url": "^1.0.9"
   }
 }
