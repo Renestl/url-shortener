@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>URL Shortener Microservice</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
+	<link rel="stylesheet" href="./css/styles.css">
+
+</head>
+<body>
+	<h1>FCC URL Shortener Microservice</h1>
+
+	<h3>User stories:</h3>
+	<ul>
+		<li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li>
+		<li>If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</li>
+		<li>When I visit that shortened URL, it will redirect me to my original link.</li>
+	</ul>
+
+	<h4>Example Creation Usage:</h4>
+	<p>
+		<code>
+			https://localhost.herokuapp.com/new/https://www.google.com
+			https://localhost.herokuapp.com/new/http://foo.com:80
+
+		</code>
+	</p>
+
+	<h4>Example Creation Output:</h4>
+	<p>
+		<code>
+			{ "original_url":"http://foo.com:80", "short_url":"https://localhost.herokuapp.com/8170" }
+		</code>
+	</p>
+
+	<h4>Usage:</h4>
+	<p>
+		<code>
+			https://localhost.herokuapp.com/2871
+		</code>
+	</p>
+
+	<h4>Will Redirect To:</h4>
+	<p>
+		<code>
+			https://www.google.com/
+		</code>
+	</p>
+
+	<footer>
+		<span>Created by Jennifer Currie</span>
+				<section id="socialMedia">
+					<a href="http://www.freecodecamp.com/renestl" target='_blank' role='button' class='socialContact'><i class='fire icon'></i></a>
+					<a href="https://github.com/Renestl" target='_blank' role='button' class='socialContact'><i class='github icon'></i></a>
+					<a href="http://codepen.io/renestl/" target='_blank' role='button' class='socialContact'><i class='codepen icon'></i></a>
+					<a href="https://linkedin.com/pub/jennifer-currie-mba-rhia/5/975/5a8" target='_blank' role='button' class='socialContact'><i class='linkedin icon'></i></a>
+				</section>
+	</footer>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+body {
+	padding: 0 20px;
+}
+h1 {
+	border-bottom: 1px black solid;
+}
+
+code {
+	color: red;
+}
+
+h4 {
+	margin: 10px auto;
+}
+
+p {
+	margin: 0 auto;
+}
+
+footer {
+	margin-top: 50px;
+	text-align: center;
+}
