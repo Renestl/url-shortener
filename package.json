@@ -11,9 +11,9 @@
     "url": "git+https://github.com/Renestl/url-shortener.git"
   },
   "keywords": [
-    "url",
-    "shortening",
-    "microservice"
+    "url shortening",
+    "microservice",
+    "url shortener"
   ],
   "author": "Jennifer Currie",
   "license": "ISC",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Renestl/url-shortener#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mongoose": "^4.8.6",
     "shortid": "^2.2.8",
