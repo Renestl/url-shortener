@@ -48,12 +48,26 @@ app.get('/', function(req, res) {
 
 app.get('/new/:url(*)', function(req,res) {
 	let url = req.params.url;
+	var shortUrl = "";
 
 	// check for valid url
 	if (validUrl.isUri(url)) {
+		// check for duplicates
+			// ADD THIS FUNCTIONALITY :D
+
+		// create new entry
 		let newUrl = new UserUrl({  original: url });
-		newUrl.save();
-		res.send({"original_url":url, "short_url": "next"});
+
+		// save the new link
+		newUrl.save(function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+
+		shortUrl = `http://localhost:3000/${newUrl._id}`;
+
+		res.send({"original_url":url, "short_url": shortUrl});
 	} else {
 		res.send({"error": "Enter a valid url. URL must be formated as follows: http(s)://(www.)domain.ext(/)(/path)"});
 	}
@@ -61,20 +75,12 @@ app.get('/new/:url(*)', function(req,res) {
 
 // redirect user to original URL that was given
 app.get('/:shortened_id', function(req, res) {
-	
+	// START HERE!!!
+	// ADD FIND SHORTURL FROM DATABASE
+	// REDIRECT TO ORIGINAL URL RELATED TO SHORTURL
 
 	res.send({"original_url":url, "short_url": inserted});	
 });
-
-function getShortId() {
-	let generateShort = shortid.generate();
-	return generateShort;
-}
-
-function insertNew(url) {
-	let shorty = getShortId();
-	
-}
 
 
 app.listen(port, function() {
