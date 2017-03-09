@@ -11,6 +11,8 @@ const app = express();
 // port number
 const port = 3000;
 
+let host = "http://localhost:3000/";
+
 // set static folder
 app.use(express.static('public'));
 
@@ -43,31 +45,38 @@ var UserUrl = mongoose.model("UserUrl", userUrlSchema);
 // index route
 app.get('/', function(req, res) {
 	// serve up homepage(index.html)
-	res.send('HELP ME!');
+	res.send(`HELP ME!`);
 });
 
 app.get('/new/:url(*)', function(req,res) {
 	let url = req.params.url;
-	var shortUrl = "";
+	let shortUrl = "";
+
 
 	// check for valid url
 	if (validUrl.isUri(url)) {
 		// check for duplicates
-			// ADD THIS FUNCTIONALITY :D
+		UserUrl.findOne({ original: url }, function(err, doc) {
+			if(doc) {
+					let alreadyShort = `${host}${doc._id}`;
+				res.send({"original_url":url, "short_url": alreadyShort});
+			} else {
+				// create new entry
+				let newUrl = new UserUrl({  original: url });
 
-		// create new entry
-		let newUrl = new UserUrl({  original: url });
+				// save the new link
+				newUrl.save(function(err) {
+					if (err) {
+						console.log(err);
+					}
+				});
 
-		// save the new link
-		newUrl.save(function(err) {
-			if (err) {
-				console.log(err);
+				shortUrl = `${host}${newUrl._id}`;
+
+				res.send({"original_url":url, "short_url": shortUrl});
 			}
 		});
-
-		shortUrl = `http://localhost:3000/${newUrl._id}`;
-
-		res.send({"original_url":url, "short_url": shortUrl});
+	
 	} else {
 		res.send({"error": "Enter a valid url. URL must be formated as follows: http(s)://(www.)domain.ext(/)(/path)"});
 	}
@@ -75,11 +84,17 @@ app.get('/new/:url(*)', function(req,res) {
 
 // redirect user to original URL that was given
 app.get('/:shortened_id', function(req, res) {
-	// START HERE!!!
-	// ADD FIND SHORTURL FROM DATABASE
-	// REDIRECT TO ORIGINAL URL RELATED TO SHORTURL
+	let shortened_id = req.params.shortened_id;
 
-	res.send({"original_url":url, "short_url": inserted});	
+	// ADD FIND SHORTURL FROM DATABASE
+	UserUrl.findOne({ _id: shortened_id }, function(err, doc) {
+	// REDIRECT TO ORIGINAL URL RELATED TO SHORTURL		
+		if(doc) {
+			res.redirect(doc.original);
+		} else {
+			res.redirect(`${host}`);
+		}
+	});
 });
 
 
