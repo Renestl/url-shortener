@@ -13,7 +13,7 @@ In order to use this application, you must have a mongod server running and conf
 ### Example Creation Usage:
 https://sheltered-beyond-45384.herokuapp.com/new/https://www.google.com
 
-hhttps://sheltered-beyond-45384.herokuapp.com/new/http://foo.com:80
+https://sheltered-beyond-45384.herokuapp.com/new/http://foo.com:80
 
 ### Example Creation Output:
 { "original_url":"https://www.goodreads.com", "short_url":"https://sheltered-beyond-45384.herokuapp.com/Bk64aOAqe" }
