@@ -101,6 +101,11 @@ app.get('/:shortened_id', function(req, res) {
 	});
 });
 
+// catch all
+app.get("/*", function(req, res) {
+	res.redirect(`${host}`);
+});
+
 
 app.listen(port, function() {
 	console.log(`App has started on port ${port}`);
