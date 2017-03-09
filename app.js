@@ -102,7 +102,7 @@ app.get('/:shortened_id', function(req, res) {
 });
 
 // catch all
-app.get("/*", function(req, res) {
+app.get("*", function(req, res) {
 	res.redirect(`${host}`);
 });
 
