@@ -3,15 +3,18 @@ const mongoose 		= require('mongoose');
 const bodyParser	= require('body-parser');
 const validUrl		= require('valid-url');
 const shortid		= require('shortid');
+const dotenv		= require('dotenv');
 
 const config		= require("./config/database");
 
 const app = express();
 
 // port number
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-let host = "http://localhost:3000/";
+let host = "https://sheltered-beyond-45384.herokuapp.com/";
+dotenv.config(config.database);
+var dbUrl = process.env.MONGOLAB_URI;
 
 // set static folder
 app.use(express.static('public'));
@@ -21,15 +24,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 // Connect to database
-mongoose.connect(config.database);
+// mongoose.connect(config.database);
+mongoose.connect(dbUrl);
 
 // on connection
 mongoose.connection.on('connected', () => {
-	console.log(`Connected to database ${config.database}`);
+	console.log(`Connected to database`);
 });
 
 // on error
-mongoose.connection.on('error', () => {
+mongoose.connection.on('error', (err) => {
 	console.log(`Database error: ${err}`);
 });
 
